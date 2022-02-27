@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+    <div class="card w-100">
+        <div class="card-body">
+            {% set totalPrice = 0 %}
+
+            {% if cartProducts|length > 0 %}
+                {% for product in cartProducts %}
+
+                    <div class="card-title">
+                        {{ product.product.name }}
+                    </div>
+                    <div class="card-text">
+                        €{{ product.product.price }}
+                        <span class="badge rounded-pill bg-light text-dark">{{ product.quantity }}</span>
+                    </div>
+
+                    <a class="btn btn-primary" href="{{ path('cart_increment_by_one', {id: product.product.id}) }}">+</a>
+
+                    <a class="btn btn-secondary" href="{{ path('cart_decrement_by_one', {id: product.product.id}) }}">-</a>
+                    {% if product.quantity is same as(0) %}
+                    {% endif %}
+
+                    <a class="btn btn-danger" href="{{ path('cart_remove_one', {id: product.product.id}) }}">Remove</a>
+
+                    {% set totalPrice = product.product.price * product.quantity %}
+                    <div class="card-text price">
+                        <span>TOTAL: </span>  €{{ totalPrice }}
+                    </div>
+                {% endfor %}
+                <div class="d-grid gap-2">
+                    <a class="btn btn-primary" href="{{ path('order_checkout') }}">Checkout</a>
+                </div>
+
+
+            {% else %}
+                <p>No products in cart!</p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if countProducts is defined and countProducts is not null %}
+            {% for count in countProducts %}
+                Total number of available products: {{ count }}<br>
+            {% endfor %}
+        {% endif %}
+        <hr>
+
+        {% if products is defined and products is not null %}
+            {% for product in products %}
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                {{ product.name }}
+                            </div>
+                            <div class="card-text">
+                                €{{ product.price }}
+                            </div>
+                        </div>
+                        <a class="link-product-add" href="{{ path('cart_add_to', {id: product.id}) }}">Add to cart</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrderController!{% endblock %}
+
+{% block body %}
+
+    <div class="container table-responsive-md">
+        <p style="text-align: center">My orders</p>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                {% for product in order.getOrderProducts %}
+                <tr>
+                    <td>{{ product.product.name }}</td>
+                </tr>
+            </tbody>
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
